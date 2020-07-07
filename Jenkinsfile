@@ -1,50 +1,30 @@
 pipeline{
     agent any
     
+    tools { 
+        maven 'Maven3.6.3' 
+        jdk 'Java9' 
+    }
+    
     stages{
-        stage('Build') {
+        stage('Git Checkout') {
             steps{
-                echo "Building.."
+               git credentialsId: 'GitHub', url: 'https://github.com/deb538/Ecomm_Demo.git'
+                echo "Git Checkout Done.."
+            }
+        }
+        stage ('Initialize') {
+            steps {
+                echo "PATH = ${PATH}"
+                echo "M2_HOME = ${M2_HOME}"
+            }
+        }
+        stage('Maven Build'){
+            steps{
+                
+                bat 'java --version'
+                bat 'mvn clean install'
             }
         }
     }
 }
-
-
-
-/*node {
-
-    def app
-
-    stage('Clone repository') {
-        
-        checkout scm
-        
-        echo "Cloned the Repository to our Workspace"
-    }
-
-    stage('Build image') {
-        echo "Building the actual image"
-
-        app = docker.build("deb538/catalogue")
-        
-        echo "Image build complete"
-    }
-
-    stage('Test image') {
-        
-        app.inside {
-            echo "Tests passed"
-        }
-    }
-
-    stage('Push image') {
-         docker.withRegistry('https://registry.hub.docker.com', 'deb538') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-        echo "Trying to Push Docker Build to DockerHub"
-    }
-    
-    
-}*/
