@@ -2,16 +2,18 @@ node {
     def app
 
     stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-
+        
         checkout scm
-        echo "Cloning the Repository to our Workspace"
+        
+        echo "Cloned the Repository to our Workspace"
     }
 
     stage('Build image') {
-        /* This builds the actual image */
+        echo "Building the actual image"
 
         app = docker.build("deb538/catalogue")
+        
+        echo "Image build complete"
     }
 
     stage('Test image') {
