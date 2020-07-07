@@ -5,10 +5,7 @@ node {
         /* Cloning the Repository to our Workspace */
 
         checkout scm
-        
-        app.inside {
-            echo "Clone passed"
-        }
+        echo "Cloning the Repository to our Workspace"
     }
 
     stage('Build image') {
