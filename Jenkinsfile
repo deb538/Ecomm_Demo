@@ -1,4 +1,19 @@
-node {
+pipeline{
+    agent any
+    
+    stages{
+        stage{
+            steps{
+                echo "Building.."
+            }
+        }
+    }
+}
+
+
+
+/*node {
+
     def app
 
     stage('Clone repository') {
@@ -24,13 +39,12 @@ node {
     }
 
     stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'deb538') {
+         docker.withRegistry('https://registry.hub.docker.com', 'deb538') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
-            } 
-                echo "Trying to Push Docker Build to DockerHub"
+        }
+        echo "Trying to Push Docker Build to DockerHub"
     }
-}
+    
+    
+}*/
