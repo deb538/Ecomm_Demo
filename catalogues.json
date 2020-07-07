@@ -1,0 +1,27 @@
+{
+	"error": "0",
+	"total": "2",
+	"page": "1",
+	"catalogues": [
+		{
+			"category": "E-Book",
+			"productName": "Architecting, Developing, and Administering MongoDB",
+			"subCategory": "IT Book",
+			"price": "35.20",
+			"currency": "INR",
+			"leftOver":"5",
+			"image": "https://itbook.store/img/books/9781484206485.png",
+			"url": "https://itbook.store/books/9781484206485"
+		},
+		{
+			"category": "E-Book",
+			"productName": "A complete guide to dealing with Big Data using MongoDB",
+			"subCategory": "IT Book",
+			"price": "42.20",
+			"currency": "INR",
+			"leftOver":"5",
+			"image": "https://itbook.store/img/books/9781484206485.png",
+			"url": "https://itbook.store/books/9781484206485"
+		}
+	]
+}
