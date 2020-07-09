@@ -23,10 +23,10 @@ pipeline{
                 echo "M2_HOME = ${M2_HOME}"
             }
         }
-        stage('Maven Unit Test'){
+        stage('Maven Unit Test And Package'){
             steps{
                 
-                bat 'mvn test'
+                bat 'mvn install clean'
             }
         }
         stage('Docker Build'){
