@@ -94,5 +94,21 @@ public class CatalogueController {
 		Consumer<Catalogue> c = catalogue -> this.addCatalogue(catalogue);
 		c.accept(cat); 
 	}
+	
+	@GetMapping("/dummy")
+	public ResponseEntity<ControllerInputOutput> getDummyOutput() {
+
+		List<Catalogue> allCatalogues = catalogueService.getAllCatalogues();
+
+		if (allCatalogues == null || allCatalogues.isEmpty()) {
+			throw new CustomRunTimeException("No Resource found");
+		}
+		
+		
+		ControllerInputOutput output = new ControllerInputOutput.ControllerBuilder().message("Experiment Success")
+				.build();
+
+		return new ResponseEntity<ControllerInputOutput>(output, HttpStatus.OK);
+	}
 
 }

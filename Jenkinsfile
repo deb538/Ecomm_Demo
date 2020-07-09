@@ -1,6 +1,10 @@
 pipeline{
     agent any
     
+    environment {
+        registryCredential = 'Docker_Hub_password'
+    }
+    
     tools { 
         maven 'Maven3.6.3' 
         jdk 'Java9' 
@@ -19,12 +23,29 @@ pipeline{
                 echo "M2_HOME = ${M2_HOME}"
             }
         }
-        stage('Maven Build'){
+        stage('Maven Unit Test'){
             steps{
                 
-                bat 'java --version'
-                bat 'mvn clean install'
+                bat 'mvn test'
+            }
+        }
+        stage('Docker Build'){
+            steps{
+                
+                bat 'docker --version'
+                bat 'docker build . -t deb538/catalogue:0.0.1-SNAPSHOT'
+            }
+        }
+        stage('Docker Push'){
+            steps{
+                
+                echo 'registryCredential'
+                
+                withDockerRegistry(credentialsId: 'deb538', url: "") {
+                    bat 'docker push deb538/catalogue:0.0.1-SNAPSHOT'
+                }
             }
         }
     }
 }
+

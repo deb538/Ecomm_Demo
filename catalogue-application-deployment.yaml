@@ -19,7 +19,7 @@ spec:
         - name: RDS_DB_NAME
           value: catalogue
         - name: RDS_HOSTNAME
-          value: mysql
+          value: "database-1.crllcrkrwl8a.ap-south-1.rds.amazonaws.com"
         - name: RDS_PASSWORD
           value: user
         - name: RDS_PORT
