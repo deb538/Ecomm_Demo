@@ -1,8 +1,12 @@
+def getDockerTag(){
+    return '0.0.1-SNAPSHOT';
+}
+
 pipeline{
     agent any
     
     environment {
-        registryCredential = 'Docker_Hub_password'
+        DOCKER_TAG = getDockerTag()
     }
     
     tools { 
@@ -21,31 +25,28 @@ pipeline{
             steps {
                 echo "PATH = ${PATH}"
                 echo "M2_HOME = ${M2_HOME}"
+                echo "DOCKER_TAG = ${DOCKER_TAG}"
             }
         }
-        stage('Maven Unit Test'){
+        stage('Maven Unit Test and Package'){
             steps{
-                bat 'mvn test'
+                bat 'mvn install package'
             }
         }
         stage('Docker Build'){
             steps{
             
-                bat 'mvn install clean'
                 bat 'docker --version'
-                bat 'docker build . -t deb538/catalogue:0.0.1-SNAPSHOT'
+                bat "docker build . -t deb538/catalogue:${DOCKER_TAG}"
             }
         }
         stage('Docker Push'){
             steps{
                 
-                echo 'registryCredential'
-                
                 withDockerRegistry(credentialsId: 'deb538', url: "") {
-                    bat 'docker push deb538/catalogue:0.0.1-SNAPSHOT'
+                    bat "docker push deb538/catalogue:${DOCKER_TAG}"
                 }
             }
         }
     }
 }
-
