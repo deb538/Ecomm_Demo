@@ -2,21 +2,21 @@ package com.catalogue.Service.IService;
 
 import java.util.List;
 
-import com.catalogue.Model.Catalogue;
+import com.catalogue.Model.Inventory;
 
 public interface ICatalogueService {
 
-	public List<Catalogue> getAllCatalogues();
+	public List<Inventory> getAllCatalogues();
 	
-	public Catalogue getCatalogue(Integer id);
+	public Inventory getCatalogue(Integer id);
 	
 	public void deleteCatalogue(Integer id);
 	
-	public Catalogue saveCatalogue(Catalogue Catalogue);
+	public Inventory saveCatalogue(Inventory Catalogue);
 	
-	public Catalogue linkCatalogueWithStudent(Catalogue Catalogue);
+	public Inventory linkCatalogueWithStudent(Inventory Catalogue);
 	
-	public Catalogue deLinkCatalogueWithStudent(Catalogue Catalogue);
+	public Inventory deLinkCatalogueWithStudent(Inventory Catalogue);
 	
-	public Catalogue getCatalogueBySerialNumber(String serialNumber);
+	public Inventory getCatalogueBySerialNumber(String serialNumber);
 }

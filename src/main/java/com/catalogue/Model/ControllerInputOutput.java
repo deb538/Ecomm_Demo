@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ControllerInputOutput {
 	
-	private List<Catalogue> catalogueList;
+	private List<Inventory> catalogueList;
 	
 	private String message;
 	
@@ -12,7 +12,7 @@ public class ControllerInputOutput {
 		return message;
 	}
 
-	public List<Catalogue> getcatalogueList() {
+	public List<Inventory> getcatalogueList() {
 		return catalogueList;
 	}
 	
@@ -23,7 +23,7 @@ public class ControllerInputOutput {
 	
 	public static class ControllerBuilder{
 		
-		private List<Catalogue> catalogueList;
+		private List<Inventory> catalogueList;
 		
 		private String message;
 		
@@ -31,7 +31,7 @@ public class ControllerInputOutput {
 			
 		}
 		
-		public ControllerBuilder catalogueList(List<Catalogue> catalogueList) {
+		public ControllerBuilder catalogueList(List<Inventory> catalogueList) {
 			this.catalogueList = catalogueList;
 			return this;
 		}

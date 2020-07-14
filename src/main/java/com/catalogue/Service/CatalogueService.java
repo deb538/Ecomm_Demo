@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catalogue.Exception.CustomRunTimeException;
-import com.catalogue.Model.Catalogue;
+import com.catalogue.Model.Inventory;
 import com.catalogue.Repository.DAOImpl;
 import com.catalogue.Service.IService.ICatalogueService;
 
@@ -16,13 +16,13 @@ public class CatalogueService implements ICatalogueService{
 	@Autowired
 	DAOImpl daoImpl;
 
-	public List<Catalogue> getAllCatalogues() {
+	public List<Inventory> getAllCatalogues() {
 		return daoImpl.getAllCatalogues();
 	}
 	
-	public Catalogue getCatalogue(Integer id) {
+	public Inventory getCatalogue(Integer id) {
 		
-		Catalogue Catalogue = daoImpl.getCatalogue(Long.valueOf(id.toString()));
+		Inventory Catalogue = daoImpl.getCatalogue(Long.valueOf(id.toString()));
 		
 		if(Catalogue == null) {
 			throw new CustomRunTimeException("No Catalogue found for Id " + id);
@@ -30,9 +30,9 @@ public class CatalogueService implements ICatalogueService{
 		return Catalogue;
 	}
 	
-	public Catalogue getCatalogueBySerialNumber(String serialNumber) {
+	public Inventory getCatalogueBySerialNumber(String serialNumber) {
 		
-		Catalogue Catalogue = daoImpl.getCatalogueBySerialNumber(serialNumber);
+		Inventory Catalogue = daoImpl.getCatalogueBySerialNumber(serialNumber);
 		
 		if(Catalogue == null) {
 			throw new CustomRunTimeException("No Catalogue found for serial number " + serialNumber);
@@ -44,11 +44,11 @@ public class CatalogueService implements ICatalogueService{
 		daoImpl.deleteCatalogue(Long.valueOf(id.toString()));
 	}
 	
-	public Catalogue saveCatalogue(Catalogue Catalogue) {
+	public Inventory saveCatalogue(Inventory Catalogue) {
 		return daoImpl.addCatalogue(Catalogue);
 	}
 	
-	public Catalogue linkCatalogueWithStudent(Catalogue Catalogue) {
+	public Inventory linkCatalogueWithStudent(Inventory Catalogue) {
 		Catalogue =  this.saveCatalogue(Catalogue);
 		/*if(Catalogue.getCustomerNumber() != null) {
 			
@@ -62,7 +62,7 @@ public class CatalogueService implements ICatalogueService{
 		return Catalogue;
 	}
 	
-	public Catalogue deLinkCatalogueWithStudent(Catalogue Catalogue) {
+	public Inventory deLinkCatalogueWithStudent(Inventory Catalogue) {
 		return this.saveCatalogue(Catalogue);
 	}
 }

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "inventory")
-public class Catalogue{
+public class Inventory{
 	
 	@Id
 	@GeneratedValue
@@ -24,7 +24,7 @@ public class Catalogue{
 	@Column(name = "product_name")
 	private String productName;
 	
-	@Column(name = "sub_title")
+	@Column(name = "sub_category")
 	private String subCategory;
 	
 	private Integer price;

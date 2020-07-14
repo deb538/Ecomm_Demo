@@ -21,11 +21,11 @@ spec:
         - name: RDS_HOSTNAME
           value: "database-1.crllcrkrwl8a.ap-south-1.rds.amazonaws.com"
         - name: RDS_PASSWORD
-          value: user
+          value: adminuser
         - name: RDS_PORT
           value: "3306"
         - name: RDS_USERNAME
-          value: user
+          value: admin
         image: deb538/catalogue:0.0.1-SNAPSHOT
         imagePullPolicy: ""
         name: catalogue-application
