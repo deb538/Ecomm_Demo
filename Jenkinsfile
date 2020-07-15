@@ -1,5 +1,5 @@
 def getDockerTag(){
-    return '0.0.1-SNAPSHOT';
+    return '0.0.2-SNAPSHOT';
 }
 
 pipeline{
