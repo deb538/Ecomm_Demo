@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu request for container
+      catalogue-service'
+  creationTimestamp: "2020-07-16T08:58:57Z"
+  generateName: catalogue-service-65d99b4c54-
+  labels:
+    io.kompose.service: catalogue-service
+    pod-template-hash: 65d99b4c54
+  name: catalogue-service-65d99b4c54-qgm5d
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: catalogue-service-65d99b4c54
+    uid: 950cac38-c742-11ea-a26e-42010a8001ac
+  resourceVersion: "2533"
+  selfLink: /api/v1/namespaces/default/pods/catalogue-service-65d99b4c54-qgm5d
+  uid: 9519429e-c742-11ea-a26e-42010a8001ac
+spec:
+  containers:
+  - env:
+    - name: RDS_DB_NAME
+      value: sql9354505
+    - name: RDS_HOSTNAME
+      value: sql9.freesqldatabase.com
+    - name: RDS_PASSWORD
+      value: jVFJhDUKt5
+    - name: RDS_PORT
+      value: "3306"
+    - name: RDS_USERNAME
+      value: sql9354505
+    image: deb538/catalogue:0.0.1-SNAPSHOT
+    imagePullPolicy: IfNotPresent
+    name: catalogue-service
+    ports:
+    - containerPort: 5000
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 100m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-zsp25
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: gke-cluster-1-default-pool-30048d44-9p1g
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-zsp25
+    secret:
+      defaultMode: 420
+      secretName: default-token-zsp25
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-07-16T08:58:57Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-07-16T08:59:05Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-07-16T08:59:05Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-07-16T08:58:57Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://60e89deb68f52396ec74de5d7560415a7c91dc599b14d5ba5d44b9650a65d62b
+    image: deb538/catalogue:0.0.1-SNAPSHOT
+    imageID: docker-pullable://deb538/catalogue@sha256:d29ee9f22836f3b0993bc78d0587d0acabf32af92a00bba7f25aa7859254709a
+    lastState: {}
+    name: catalogue-service
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: "2020-07-16T08:59:05Z"
+  hostIP: 10.128.0.33
+  phase: Running
+  podIP: 10.4.1.4
+  qosClass: Burstable
+  startTime: "2020-07-16T08:58:57Z"

@@ -1,12 +1,55 @@
-def getDockerTag(){
-    return '0.0.2-SNAPSHOT';
-}
+	def getDockerTag(){
+		return '0.0.2-SNAPSHOT';
+	}
+
+	/*
+		Create the kubernetes namespace
+	 */
+	def createNamespace (namespace) {
+		echo "Creating namespace ${namespace} if needed"
+
+		bat "kubectl create namespace ${namespace}"
+	}
+
+	/*
+		Helm install
+	 */
+	def helmInstall (namespace) {
+		echo "Installing in ${namespace}"
+
+		script {
+			bat "helm repo add helm ${HELM_REPO}; helm repo update"
+			bat "helm upgrade --install catalogue-service --namespace=${namespace} chartmuseum/catalogue-service"
+			bat "sleep 5"
+		}
+	}
+
+	/*
+		Helm delete (if exists)
+	 */
+	def helmDelete (namespace) {
+		echo "Deleting in ${namespace} if deployed"
+
+		script {
+			bat "helm delete chartmuseum/catalogue-service --namespace=${namespace}"
+		}
+	}
 
 pipeline{
-    agent any
+    agent {
+        kubernetes {
+            defaultContainer 'jnlp'
+            yamlFile 'build.yaml'
+            idleMinutes 5
+        }
+    }
     
     environment {
         DOCKER_TAG = getDockerTag()
+    }
+    
+    parameters {
+        string (name: 'HELM_REPO', defaultValue: 'http://localhost:8090', description: 'Your helm repository')
     }
     
     tools { 
@@ -26,6 +69,7 @@ pipeline{
                 echo "PATH = ${PATH}"
                 echo "M2_HOME = ${M2_HOME}"
                 echo "DOCKER_TAG = ${DOCKER_TAG}"
+                /*echo "helm_repo = ${HELM_REPO}"*/
             }
         }
         stage('Maven Unit Test and Package'){
@@ -37,16 +81,32 @@ pipeline{
             steps{
             
                 bat 'docker --version'
-                bat "docker build . -t deb538/catalogue:${DOCKER_TAG}"
             }
         }
         stage('Docker Push'){
             steps{
-                
-                withDockerRegistry(credentialsId: 'deb538', url: "") {
-                    bat "docker push deb538/catalogue:${DOCKER_TAG}"
-                }
+				echo "PATH = ${PATH}"
             }
+        }
+        stage('Helm Build'){
+			steps{
+				container('helm') {
+					bat 'helm version'
+				}
+			
+				script {
+					namespace = 'dit'
+					
+					createNamespace (namespace)
+
+					// Remove release if exists
+					helmDelete (namespace)
+
+					// Deploy with helm
+					echo "Deploying"
+					helmInstall(namespace)
+				}
+			}
         }
     }
 }
