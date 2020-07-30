@@ -36,6 +36,7 @@
 	}
 
 pipeline{
+    
     agent {
         kubernetes {
             defaultContainer 'jnlp'
