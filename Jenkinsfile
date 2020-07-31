@@ -106,7 +106,7 @@ pipeline{
 						/*createNamespace (namespace)*/
 		
 						// Remove release if exists
-						helmDelete (namespace)
+						/*helmDelete (namespace)*/
 		
 						// Deploy with helm
 						echo "Deploying"
