@@ -18,7 +18,8 @@
 		echo "Installing in ${namespace}"
 
 		script {
-			sh "helm repo add helm ${HELM_REPO}; helm repo update"
+			sh "helm repo add e_comm_538 ${HELM_REPO}; helm repo update"
+			sh "helm repo update"
 			sh "helm upgrade --install catalogue-service --namespace=${namespace} e_comm_538/catalogue-service"
 			sh "sleep 5"
 		}
@@ -98,9 +99,6 @@ pipeline{
 				
 					script{
 					
-						sh "helm repo add e_comm_538 https://kubernetes-charts-incubator.storage.googleapis.com"
-						sh "helm repo update"
-				
 						namespace = 'dit'
 						sh 'helm version'
 			
