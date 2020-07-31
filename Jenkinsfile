@@ -75,7 +75,7 @@ pipeline{
         }
         stage('Maven Unit Test and Package'){
             steps{
-            	sh 'mvn install package'
+            	/*sh 'mvn install package'*/
             }
         }
         stage('Docker Build'){
