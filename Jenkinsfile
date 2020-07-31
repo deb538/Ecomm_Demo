@@ -95,6 +95,11 @@ pipeline{
         stage('Helm Build'){
 			
 			steps{
+			
+				container('kubectl') {
+				
+					kubectl apply -f 'role.yaml'
+				}
 				container('helm') {
 				
 					script{
