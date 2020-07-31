@@ -50,7 +50,7 @@ pipeline{
     }
     
     parameters {
-        string (name: 'HELM_REPO', defaultValue: 'http://localhost:8090', description: 'Your helm repository')
+        string (name: 'HELM_REPO', defaultValue: 'https://storage.googleapis.com/my-gcs-bucket-538/', description: 'Your helm repository')
     }
     
     tools { 
@@ -100,7 +100,7 @@ pipeline{
 						namespace = 'dit'
 						sh 'helm version'
 			
-						/*createNamespace (namespace)*/
+						createNamespace (namespace)
 		
 						// Remove release if exists
 						helmDelete (namespace)

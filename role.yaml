@@ -5,7 +5,7 @@ metadata:
   name: pod-reader # Role name will be needed for binding to user
 rules:
 - apiGroups: [""] # "" indicates the core API group
-  resources: ["deployments", "replicasets", "pods"]
+  resources: ["deployments", "replicasets", "pods", "pods/log", pods/portforward]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ---
 kind: RoleBinding
