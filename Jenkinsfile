@@ -76,7 +76,7 @@ pipeline{
         stage('Maven Unit Test and Package'){
             steps{
             	echo "Maven packaging start.."
-                bat 'mvn install package'
+                sh 'mvn install package'
                 echo "Maven packaging end.."
             }
         }
