@@ -91,12 +91,12 @@ pipeline{
             }
         }
         stage('Helm Build'){
-			container('helm') {
-				steps{
+			namespace = 'dit'
+			steps{
+				container('helm') {
+				
 					sh 'helm version'
 			
-					namespace = 'dit'
-					
 					/*createNamespace (namespace)*/
 	
 					// Remove release if exists
