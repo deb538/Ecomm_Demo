@@ -19,7 +19,7 @@
 
 		script {
 			sh "helm repo add helm ${HELM_REPO}; helm repo update"
-			sh "helm upgrade --install catalogue-service --namespace=${namespace} chartmuseum/catalogue-service"
+			sh "helm upgrade --install catalogue-service --namespace=${namespace} e_comm_538/catalogue-service"
 			sh "sleep 5"
 		}
 	}
@@ -31,7 +31,7 @@
 		echo "Deleting in ${namespace} if deployed"
 
 		script {
-			sh "helm delete chartmuseum/catalogue-service --namespace=${namespace}"
+			sh "helm delete e_comm_538/catalogue-service --namespace=${namespace}"
 		}
 	}
 
