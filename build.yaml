@@ -10,14 +10,14 @@ spec:
       image: maven:3.3.9-jdk-8-alpine
       command:
         - cat
-      ttyEnabled: true
+      tty: true
       terminationMessagePath: "/tmp/my-log"
       terminationMessagePolicy: FallbackToLogsOnError
     - name: docker
       image: docker:19.03
       command:
         - cat
-      ttyEnabled: true
+      tty: true
       volumeMounts:
         - name: dockersock
           mountPath: /var/run/docker.sock
@@ -25,7 +25,7 @@ spec:
       image: lachlanevenson/k8s-helm:v3.1.1
       command:
         - cat
-      ttyEnabled: true
+      tty: true
   volumes:
     - name: dockersock
       hostPath:
