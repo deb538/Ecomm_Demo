@@ -100,7 +100,7 @@ pipeline{
 						namespace = 'dit'
 						sh 'helm version'
 			
-						createNamespace (namespace)
+						/*createNamespace (namespace)*/
 		
 						// Remove release if exists
 						helmDelete (namespace)
