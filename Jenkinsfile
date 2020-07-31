@@ -91,8 +91,8 @@ pipeline{
             }
         }
         stage('Helm Build'){
-			steps{
-				container('helm') {
+			container('helm') {
+				steps{
 					sh 'helm version'
 			
 					namespace = 'dit'
