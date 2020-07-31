@@ -96,6 +96,9 @@ pipeline{
 				container('helm') {
 				
 					script{
+					
+						sh "helm repo add e_comm_538 https://kubernetes-charts-incubator.storage.googleapis.com"
+						helm repo update
 				
 						namespace = 'dit'
 						sh 'helm version'
