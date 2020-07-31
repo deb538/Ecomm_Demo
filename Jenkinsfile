@@ -8,7 +8,7 @@
 	def createNamespace (namespace) {
 		echo "Creating namespace ${namespace} if needed"
 
-		bat "kubectl create namespace ${namespace}"
+		sh "kubectl create namespace ${namespace}"
 	}
 
 	/*
@@ -18,9 +18,9 @@
 		echo "Installing in ${namespace}"
 
 		script {
-			bat "helm repo add helm ${HELM_REPO}; helm repo update"
-			bat "helm upgrade --install catalogue-service --namespace=${namespace} chartmuseum/catalogue-service"
-			bat "sleep 5"
+			sh "helm repo add helm ${HELM_REPO}; helm repo update"
+			sh "helm upgrade --install catalogue-service --namespace=${namespace} chartmuseum/catalogue-service"
+			sh "sleep 5"
 		}
 	}
 
@@ -31,7 +31,7 @@
 		echo "Deleting in ${namespace} if deployed"
 
 		script {
-			bat "helm delete chartmuseum/catalogue-service --namespace=${namespace}"
+			sh "helm delete chartmuseum/catalogue-service --namespace=${namespace}"
 		}
 	}
 
@@ -75,15 +75,13 @@ pipeline{
         }
         stage('Maven Unit Test and Package'){
             steps{
-            	echo "Maven packaging start.."
-                sh 'mvn install package'
-                echo "Maven packaging end.."
+            	sh 'mvn install package'
             }
         }
         stage('Docker Build'){
             steps{
             
-                bat 'docker --version'
+                sh 'docker --version'
             }
         }
         stage('Docker Push'){
@@ -94,7 +92,7 @@ pipeline{
         stage('Helm Build'){
 			steps{
 				container('helm') {
-					bat 'helm version'
+					sh 'helm version'
 				}
 			
 				script {
