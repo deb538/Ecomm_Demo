@@ -98,7 +98,7 @@ pipeline{
 			
 				container('kubectl') {
 				
-					kubectl apply -f 'role.yaml'
+					sh 'kubectl apply -f 'role.yaml''
 				}
 				container('helm') {
 				
