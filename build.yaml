@@ -11,6 +11,8 @@ spec:
       command:
         - cat
       tty: true
+      terminationMessagePath: "/tmp/my-log"
+      terminationMessagePolicy: FallbackToLogsOnError
     - name: docker
       image: docker:19.03
       command:
