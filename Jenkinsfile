@@ -76,6 +76,7 @@ pipeline{
         stage('Maven Unit Test and Package'){
             steps{
             	/*sh 'mvn install package'*/
+            	echo "PATH = ${PATH}"
             }
         }
         stage('Docker Build'){
