@@ -8,7 +8,7 @@
 	def createNamespace (namespace) {
 		echo "Creating namespace ${namespace} if needed"
 
-		sh "kubectl create namespace ${namespace}"
+		sh "[ ! -z \"\$(kubectl get ns ${namespace} -o name 2>null)\" ] | |kubectl create namespace ${namespace}"
 	}
 
 	/*
