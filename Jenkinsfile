@@ -96,18 +96,16 @@ pipeline{
 					sh 'helm version'
 				}
 			
-				script {
-					namespace = 'dit'
-					
-					createNamespace (namespace)
+				namespace = 'dit'
+				
+				/*createNamespace (namespace)*/
 
-					// Remove release if exists
-					helmDelete (namespace)
+				// Remove release if exists
+				helmDelete (namespace)
 
-					// Deploy with helm
-					echo "Deploying"
-					helmInstall(namespace)
-				}
+				// Deploy with helm
+				echo "Deploying"
+				helmInstall(namespace)
 			}
         }
     }
