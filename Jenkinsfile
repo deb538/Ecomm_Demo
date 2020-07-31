@@ -80,8 +80,9 @@ pipeline{
         }
         stage('Docker Build'){
             steps{
-            
-                sh 'docker --version'
+            	container('docker') {
+                	sh 'docker --version'
+                }
             }
         }
         stage('Docker Push'){
