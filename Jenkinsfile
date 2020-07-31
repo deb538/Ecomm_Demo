@@ -91,20 +91,24 @@ pipeline{
             }
         }
         stage('Helm Build'){
-			namespace = 'dit'
+			
 			steps{
 				container('helm') {
 				
-					sh 'helm version'
+					script{
+				
+						namespace = 'dit'
+						sh 'helm version'
 			
-					/*createNamespace (namespace)*/
-	
-					// Remove release if exists
-					helmDelete (namespace)
-	
-					// Deploy with helm
-					echo "Deploying"
-					helmInstall(namespace)
+						/*createNamespace (namespace)*/
+		
+						// Remove release if exists
+						helmDelete (namespace)
+		
+						// Deploy with helm
+						echo "Deploying"
+						helmInstall(namespace)
+					}
 				}
 			}
         }
