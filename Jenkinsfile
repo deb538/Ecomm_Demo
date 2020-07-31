@@ -96,9 +96,13 @@ pipeline{
 			
 			steps{
 			
-				container('kubectl') {
+				container('gcloud') {
 				
-					sh 'kubectl apply -f role.yaml'
+					echo "gcloud start"
+					sh 'gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project aerial-yeti-281414'
+					echo "gcloud connected"
+					sh 'kubectl get all'
+					echo "gcloud end"
 				}
 				container('helm') {
 				
