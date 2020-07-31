@@ -94,18 +94,18 @@ pipeline{
 			steps{
 				container('helm') {
 					sh 'helm version'
-				}
 			
-				namespace = 'dit'
-				
-				/*createNamespace (namespace)*/
-
-				// Remove release if exists
-				helmDelete (namespace)
-
-				// Deploy with helm
-				echo "Deploying"
-				helmInstall(namespace)
+					namespace = 'dit'
+					
+					/*createNamespace (namespace)*/
+	
+					// Remove release if exists
+					helmDelete (namespace)
+	
+					// Deploy with helm
+					echo "Deploying"
+					helmInstall(namespace)
+				}
 			}
         }
     }
