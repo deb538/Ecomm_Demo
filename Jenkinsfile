@@ -19,8 +19,8 @@
 
 		script {
 			sh "helm repo add e_comm_538 ${HELM_REPO}; helm repo update"
-			sh "helm repo update"
-			sh "helm upgrade --install catalogue-service e_comm_538/catalogue-service"
+			/*sh "helm repo update"*/
+			sh "helm upgrade --install catalogue-service e_comm_538/catalogue-service --namespace ${namespace}"
 			sh "sleep 5"
 		}
 	}

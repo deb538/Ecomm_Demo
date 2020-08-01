@@ -1,18 +1,18 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: default # your namespace
+  namespace: dit # your namespace
   name: pod-reader # Role name will be needed for binding to user
 rules:
 - apiGroups: ["","apps"] # "" indicates the core API group
-  resources: ["deployments", "replicasets", "pods", "pods/log", "pods/portforward", "secrets", "services"]
+  resources: ["deployments", "replicasets", "pods", "pods/log", "pods/portforward", "services", "secrets", "configmaps", "catalogue-service-volume-sec", "catalogue-service-env-configmap"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: read-pods
-  namespace: default # your namespace
+  namespace: dit # your namespace
 subjects:
 - kind: User
   name: system:anonymous # Name is case sensitive
