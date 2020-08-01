@@ -70,19 +70,23 @@ pipeline{
             steps {
                 echo "PATH = ${PATH}"
                 echo "M2_HOME = ${M2_HOME}"
-                /*echo "DOCKER_TAG = ${DOCKER_TAG}"
-                echo "helm_repo = ${HELM_REPO}"*/
+                echo "DOCKER_TAG = ${DOCKER_TAG}"
+                /*echo "helm_repo = ${HELM_REPO}"*/
             }
         }
         stage('Maven Unit Test and Package'){
             steps{
+            	container('maven') {
             		sh 'mvn install package'
+            	}
             }
         }
         stage('Docker Build'){
             steps{
+            	container('docker') {
                 	sh 'docker --version'
                 	sh "docker build . -t deb538/catalogue:${DOCKER_TAG}"
+                }
             }
         }
         stage('Docker Push'){
