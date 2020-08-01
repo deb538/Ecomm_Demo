@@ -31,11 +31,6 @@ spec:
       command:
         - cat
       tty: true
-    - name: gcloud
-      image: google/cloud-sdk:latest
-      command:
-        - cat
-      tty: true
   volumes:
     - name: dockersock
       hostPath:

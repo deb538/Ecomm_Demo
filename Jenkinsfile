@@ -54,10 +54,10 @@ pipeline{
         string (name: 'HELM_REPO', defaultValue: 'https://storage.googleapis.com/my-gcs-bucket-538/', description: 'Your helm repository')
     }
     
-    tools { 
+    /*tools { 
         maven 'Maven3.6.3' 
         jdk 'Java9' 
-    }
+    }*/
     
     stages{
         stage('Git Checkout') {
@@ -76,35 +76,32 @@ pipeline{
         }
         stage('Maven Unit Test and Package'){
             steps{
-            	/*sh 'mvn install package'*/
-            	echo "PATH = ${PATH}"
+            	container('docker') {
+            		sh 'mvn install package'
+            	}
             }
         }
         stage('Docker Build'){
             steps{
             	container('docker') {
                 	sh 'docker --version'
+                	sh "docker build . -t deb538/catalogue:${DOCKER_TAG}"
                 }
             }
         }
         stage('Docker Push'){
             steps{
-				echo "PATH = ${PATH}"
+            	container('docker') {
+            		withDockerRegistry(credentialsId: 'deb538', url: "") {
+            			sh "docker push deb538/catalogue:${DOCKER_TAG}"
+            		}
+            	}
             }
         }
         stage('Helm Build'){
 			
 			steps{
 			
-				/*container('gcloud') {
-				
-					echo "gcloud start"
-					sh "gcloud compute instances set-service-account jenkins --service-account jenkins-sa@aerial-yeti-281414.iam.gserviceaccount.com --zone us-central1-c --scopes compute-rw,storage-ro"
-					sh 'gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project aerial-yeti-281414'
-					echo "gcloud connected"
-					sh 'kubectl get all'
-					echo "gcloud end"
-				}*/
 				container('helm') {
 				
 					script{
@@ -119,7 +116,7 @@ pipeline{
 		
 						// Deploy with helm
 						echo "Deploying"
-						helmInstall(namespace)
+						/*helmInstall(namespace)*/
 					}
 				}
 			}
