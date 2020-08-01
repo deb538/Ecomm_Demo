@@ -99,7 +99,7 @@ pipeline{
 				container('gcloud') {
 				
 					echo "gcloud start"
-					sh "gcloud compute instances set-service-account jenkins --service-account jenkins-sa@aerial-yeti-281414.iam.gserviceaccount.com --scopes compute-rw,storage-ro"
+					sh "gcloud compute instances set-service-account jenkins --service-account jenkins-sa@aerial-yeti-281414.iam.gserviceaccount.com -zone us-central1-c --scopes compute-rw,storage-ro"
 					sh 'gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project aerial-yeti-281414'
 					echo "gcloud connected"
 					sh 'kubectl get all'
