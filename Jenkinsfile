@@ -81,19 +81,15 @@ pipeline{
         }
         stage('Docker Build'){
             steps{
-            	container('docker') {
                 	sh 'docker --version'
                 	sh "docker build . -t deb538/catalogue:${DOCKER_TAG}"
-                }
             }
         }
         stage('Docker Push'){
             steps{
-            	container('docker') {
             		withDockerRegistry(credentialsId: 'deb538', url: "") {
             			sh "docker push deb538/catalogue:${DOCKER_TAG}"
             		}
-            	}
             }
         }
         stage('Helm Build'){
