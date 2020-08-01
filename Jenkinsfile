@@ -77,7 +77,7 @@ pipeline{
         stage('Maven Unit Test and Package'){
             steps{
             	container('maven') {
-            		sh 'mvn package'
+            		sh 'mvn package install'
             	}
             }
         }
@@ -91,9 +91,11 @@ pipeline{
         }
         stage('Docker Push'){
             steps{
+            	container('docker') {
             		withDockerRegistry(credentialsId: 'dockerHub', url: "") {
             			sh "docker push deb538/catalogue:${DOCKER_TAG}"
             		}
+            	}
             }
         }
         stage('Helm Build'){
@@ -114,7 +116,7 @@ pipeline{
 		
 						// Deploy with helm
 						echo "Deploying"
-						/*helmInstall(namespace)*/
+						helmInstall(namespace)
 					}
 				}
 			}
