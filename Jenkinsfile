@@ -54,10 +54,10 @@ pipeline{
         string (name: 'HELM_REPO', defaultValue: 'https://storage.googleapis.com/my-gcs-bucket-538/', description: 'Your helm repository')
     }
     
-    tools { 
+    /*tools { 
         maven 'Maven3.6.3' 
         jdk 'Java9' 
-    }
+    }*/
     
     stages{
         stage('Git Checkout') {
@@ -69,15 +69,15 @@ pipeline{
         stage ('Initialize') {
             steps {
                 echo "PATH = ${PATH}"
-                echo "M2_HOME = ${M2_HOME}"
+                /*echo "M2_HOME = ${M2_HOME}"
                 echo "DOCKER_TAG = ${DOCKER_TAG}"
-                /*echo "helm_repo = ${HELM_REPO}"*/
+                echo "helm_repo = ${HELM_REPO}"*/
             }
         }
         stage('Maven Unit Test and Package'){
             steps{
             	container('maven') {
-            		sh 'mvn install package'
+            		sh 'mvn package'
             	}
             }
         }
