@@ -91,7 +91,7 @@ pipeline{
         }
         stage('Docker Push'){
             steps{
-            		withDockerRegistry(credentialsId: 'deb538', url: "") {
+            		withDockerRegistry(credentialsId: 'dockerHub', url: "") {
             			sh "docker push deb538/catalogue:${DOCKER_TAG}"
             		}
             }
